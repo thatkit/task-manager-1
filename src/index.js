@@ -13,6 +13,15 @@ class App extends React.Component {
     this.state = {
       tasks: tasksList
     };
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleClose(e) {
+    e.preventDefault();
+    console.log(e.target);
+    this.setState((state, props) => ({
+      tasks: state.tasks.filter(task => task.name !== e.target.name)
+    }));
   }
 
   render() {
@@ -20,15 +29,7 @@ class App extends React.Component {
       <div>
           <Header />
           <Add />
-          <Task key="_0" name="Build task manager" />
-          {this.state.tasks.map((el, ind) => {
-            return (
-              <div key={`_${ind + 1}`} className="row p-4 bg-light border">
-                <h2 className="col-11">{el.name}</h2>
-                <button className="col-1 btn btn-outline-danger">X</button>
-              </div>
-            );
-          })}
+          <Task handleClose={this.handleClose} tasks={this.state.tasks} />
       </div>
     );
   }
