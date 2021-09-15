@@ -10,15 +10,32 @@ import { tasksList } from './TasksList'
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      tasks: tasksList
+      tasks: tasksList,
+      newTaskName: null
     };
+
     this.handleClose = this.handleClose.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    console.log(e.target);
+  }
+
+  handleAdd(e) {
+    e.preventDefault();
+    console.log('clicky-clicky');
+    // this.setState((state, props) => ({
+    //   tasks: state.tasks.concat({name: })
+    // }));
   }
 
   handleClose(e) {
     e.preventDefault();
-    console.log(e.target);
     this.setState((state, props) => ({
       tasks: state.tasks.filter(task => task.name !== e.target.name)
     }));
@@ -28,7 +45,7 @@ class App extends React.Component {
     return (
       <div>
           <Header />
-          <Add />
+          <Add handleChange={this.handleChange} handleAdd={this.handleAdd} />
           <Task handleClose={this.handleClose} tasks={this.state.tasks} />
       </div>
     );
