@@ -14,7 +14,9 @@ export class App extends React.Component {
 
     this.state = {
       tasks: tasksList,
-      newTask: {}
+      newTask: {
+          name: ''
+      }
     };
 
     this.handleClose = this.handleClose.bind(this);
@@ -31,13 +33,18 @@ export class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState(prevState => {
-        return {tasks: prevState.tasks.concat(prevState.newTask)};
+        return {
+            tasks: prevState.tasks.concat(prevState.newTask),
+            newTask: {
+                name: ''
+            }
+        };
     });
   }
 
   handleClose(e) {
     e.preventDefault();
-    this.setState((state, props) => ({
+    this.setState(state => ({
       tasks: state.tasks.filter(task => task.name !== e.target.name)
     }));
   }
@@ -48,7 +55,7 @@ export class App extends React.Component {
           <Header />
           <Add 
             onChange={this.handleChange} 
-            value={this.state.newTaskName} 
+            value={this.state.newTask.name} 
             onSubmit={this.handleSubmit} 
           />
           <Task 
