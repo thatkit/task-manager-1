@@ -13,25 +13,21 @@ class App extends React.Component {
 
     this.state = {
       tasks: tasksList,
-      newTaskName: null
+      newTaskName: ''
     };
 
     this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    e.preventDefault();
-    console.log(e.target);
+    this.setState({newTaskName: e.target.value});
   }
 
-  handleAdd(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    console.log('clicky-clicky');
-    // this.setState((state, props) => ({
-    //   tasks: state.tasks.concat({name: })
-    // }));
+    console.log(`The event target: ${e.target}`);
   }
 
   handleClose(e) {
@@ -45,8 +41,15 @@ class App extends React.Component {
     return (
       <div>
           <Header />
-          <Add handleChange={this.handleChange} handleAdd={this.handleAdd} />
-          <Task handleClose={this.handleClose} tasks={this.state.tasks} />
+          <Add 
+            onChange={this.handleChange} 
+            value={this.state.newTaskName} 
+            onSubmit={this.handleSubmit} 
+          />
+          <Task 
+            onClose={this.handleClose} 
+            tasks={this.state.tasks} 
+          />
       </div>
     );
   }
