@@ -8,7 +8,7 @@ export const Add = (props) => {
                 className="add-task__task-text form-control col-12" 
                 type="text" 
                 name="" 
-                id="" 
+                id={999} 
                 value={props.value} 
                 placeholder="New task"    
             />

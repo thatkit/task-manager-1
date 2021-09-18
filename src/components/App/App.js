@@ -33,18 +33,33 @@ export class App extends React.Component {
 
   handleChange(e) {
     this.setState({newTask: {
-        name: e.target.value
+      name: e.target.value
     }});
   }
 
   // Add task
   handleSubmit(e) {
     e.preventDefault();
+
+    const addTask = async e => {
+      const response = await fetch(`http://localhost:5000/tasks/`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(this.state.newTask)
+      });
+
+      return response;
+    }
+
+    addTask(e);
+
     this.setState(prevState => {
         return {
             tasks: prevState.tasks.concat(prevState.newTask),
             newTask: {
-                name: ''
+              name: ''
             }
         };
     });

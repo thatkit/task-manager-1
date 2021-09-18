@@ -1,13 +1,14 @@
 import React from 'react';
 
 export const Task = (props) => {
+    const randomKey = () => Math.floor(Math.random() * 1000 + 10000);
 
     return (
         <>
             {
                 props.tasks.map(el => {
                     return (
-                        <div key={el.id} className="row p-4 bg-light border">
+                        <div key={el.id ? el.id : randomKey()} className="row p-4 bg-light border">
                             <h2 className="col-11">{el.name}</h2>
                             <button 
                                 onClick={props.onClose} 
