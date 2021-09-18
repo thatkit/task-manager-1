@@ -55,16 +55,15 @@ export class App extends React.Component {
     e.preventDefault();
 
     const deleteTask = async e => {
-      await fetch(`http://localhost:5000/tasks/1`, {
+      await fetch(`http://localhost:5000/tasks/${e.target.id}`, {
         method: 'DELETE'
       });
-      console.log(e.target.name)
     }
 
     deleteTask(e);
 
     this.setState(state => ({
-      tasks: state.tasks.filter(task => task.name !== e.target.name)
+      tasks: state.tasks.filter(task => task.id !== +e.target.id)
     }));
   }
 

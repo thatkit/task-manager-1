@@ -1,6 +1,14 @@
 {
   "tasks": [
     {
+      "id": 0,
+      "name": "Task #0"
+    },
+    {
+      "id": 1,
+      "name": "Task #1"
+    },
+    {
       "id": 2,
       "name": "Task #2"
     },
