@@ -12,7 +12,7 @@ export const Add = (props) => {
                 value={props.value} 
                 placeholder="New task"    
             />
-            <input className="add-task__add-btn btn btn-success col-2" type="submit" value="Add" />
+            <input className="add-task__add-btn btn btn-dark col-2" type="submit" value="Add" />
         </form>
     );
 }
