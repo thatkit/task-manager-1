@@ -6,6 +6,7 @@ import { Task } from '../Task/Task';
 
 import { fetchTasks } from '../../helpers'
 import { postTask } from '../../helpers'
+import { deleteTask } from '../../helpers'
 
 export class App extends React.Component {
   constructor(props) {
@@ -81,13 +82,13 @@ export class App extends React.Component {
   handleClose(e) {
     e.preventDefault();
 
-    const deleteTask = async e => {
-      await fetch(`http://localhost:5000/tasks/${e.target.id}`, {
-        method: 'DELETE'
-      });
-    }
+    // const deleteTask = async e => {
+    //   await fetch(`http://localhost:5000/tasks/${e.target.id}`, {
+    //     method: 'DELETE'
+    //   });
+    // }
 
-    deleteTask(e);
+    deleteTask(e.target.id);
 
     this.setState(state => ({
       tasks: state.tasks.filter(task => task.id !== +e.target.id)

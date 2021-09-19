@@ -28,3 +28,8 @@ export const postTask = async newTask => {
 
 // (1.3) DELETE request
 
+export const deleteTask = async id => {
+    await fetch(`${baseURL}${id}`, {
+        method: 'DELETE'
+    });
+}
