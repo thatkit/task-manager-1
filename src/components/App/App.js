@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Components
 import { Header } from '../Header/Header';
 import { Add } from '../Add/Add';
 import { Task } from '../Task/Task';
@@ -12,7 +11,8 @@ export class App extends React.Component {
     this.state = {
       tasks: [],
       newTask: {
-          name: ''
+        id: null,
+        name: ''
       }
     };
 
@@ -21,6 +21,7 @@ export class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Fetching tasks from database
   componentDidMount() {
     const fetchTasks = async () => {
       const response = await fetch('http://localhost:5000/tasks');
@@ -31,10 +32,33 @@ export class App extends React.Component {
     fetchTasks()
   }
 
+  // Handle input changes
   handleChange(e) {
-    this.setState({newTask: {
-      name: e.target.value
-    }});
+    const getID = async e => {
+      const response = await fetch('http://localhost:5000/tasks');
+      const tasks = await response.json();
+      const lastTask = await tasks[tasks.length - 1];
+
+      this.setState(prevState => {
+        return {
+          newTask: {
+            ...prevState.newTask,
+            id: lastTask ? lastTask.id + 1 : 1
+          }
+        }
+      });
+    }
+
+    getID(e);
+
+    this.setState(prevState => {
+      return {
+        newTask: {
+          ...prevState.newTask,
+          name: e.target.value
+        }
+      }
+    });
   }
 
   // Add task
