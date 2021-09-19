@@ -82,12 +82,6 @@ export class App extends React.Component {
   handleClose(e) {
     e.preventDefault();
 
-    // const deleteTask = async e => {
-    //   await fetch(`http://localhost:5000/tasks/${e.target.id}`, {
-    //     method: 'DELETE'
-    //   });
-    // }
-
     deleteTask(e.target.id);
 
     this.setState(state => ({
