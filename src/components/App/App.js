@@ -4,6 +4,8 @@ import { Header } from '../Header/Header';
 import { Add } from '../Add/Add';
 import { Task } from '../Task/Task';
 
+import { fetchTasks } from '../../helpers'
+
 export class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,13 +25,11 @@ export class App extends React.Component {
 
   // Fetching tasks from database
   componentDidMount() {
-    const fetchTasks = async () => {
-      const response = await fetch('http://localhost:5000/tasks');
-      const tasks = await response.json();
-      this.setState({tasks: await tasks});
+    const setTasks = async () => {
+      this.setState({tasks: await fetchTasks()});
     }
-    
-    fetchTasks()
+
+    setTasks();
   }
 
   // Handle input changes
