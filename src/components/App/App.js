@@ -5,6 +5,7 @@ import { Add } from '../Add/Add';
 import { Task } from '../Task/Task';
 
 import { fetchTasks } from '../../helpers'
+import { postTask } from '../../helpers'
 
 export class App extends React.Component {
   constructor(props) {
@@ -64,19 +65,7 @@ export class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const addTask = async e => {
-      const response = await fetch(`http://localhost:5000/tasks/`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(this.state.newTask)
-      });
-
-      return response;
-    }
-
-    addTask(e);
+    postTask(this.state.newTask);
 
     this.setState(prevState => {
         return {
