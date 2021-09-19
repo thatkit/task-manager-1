@@ -35,8 +35,7 @@ export class App extends React.Component {
   // Handle input changes
   handleChange(e) {
     const getID = async e => {
-      const response = await fetch('http://localhost:5000/tasks');
-      const tasks = await response.json();
+      const tasks = await fetchTasks();
       const lastTask = await tasks[tasks.length - 1];
 
       this.setState(prevState => {
